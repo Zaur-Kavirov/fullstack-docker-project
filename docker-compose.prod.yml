@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  backend:
+    image: iazuri/backend:latest
+    container_name: backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - redis
+
+  frontend:
+    image: iazuri/frontend:latest
+    container_name: frontend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - backend
+
+  reverse_proxy:
+    image: nginx:1.19-alpine
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+
+  postgres:
+    image: postgres:13.2-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  redis:
+    image: redis:latest
