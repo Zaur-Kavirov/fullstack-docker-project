@@ -1,4 +1,5 @@
-FROM node:14 AS build-phase
+# ===== Stage 1: Build static files =====
+FROM node:14 AS web
 
 WORKDIR /usr/src/app
 
@@ -8,13 +9,14 @@ RUN npm install -g serve && \
     npm install && \
     npm run build
 
+# ===== Stage 2: Minimal final image =====
 FROM node:14-alpine3.13
 
 EXPOSE 5000
 
 WORKDIR /usr/src/app
 
-COPY --from=build-phase /usr/src/app/build/ /usr/src/app/build
+COPY --from=web /usr/src/app/build/ /usr/src/app/build
 
 RUN npm install -g serve && \
     adduser -D appuser && \
@@ -22,5 +24,4 @@ RUN npm install -g serve && \
 
 USER appuser
 
-ENTRYPOINT [ "serve", "-s", "-l", "5000", "build" ]
-
+ENTRYPOINT ["serve", "-s", "-l", "5000", "build"]

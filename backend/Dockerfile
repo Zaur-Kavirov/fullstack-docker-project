@@ -1,4 +1,5 @@
-FROM golang:1.16 AS build-env
+# ===== Stage 1: Build binary =====
+FROM golang:1.16 AS srv
 
 WORKDIR /usr/src/app
 
@@ -9,15 +10,16 @@ RUN go build && \
     useradd -m appuser && \
     chown appuser server
 
+# ===== Stage 2: Final minimal image =====
 FROM scratch
 
 EXPOSE 8080
 
 WORKDIR /usr/src/app
 
-COPY --from=build-env /usr/src/app/server /usr/src/app
-COPY --from=build-env /etc/passwd /etc/passwd
+COPY --from=srv /usr/src/app/server /usr/src/app
+COPY --from=srv /etc/passwd /etc/passwd
 
 USER appuser
 
-ENTRYPOINT [ "./server" ]
+ENTRYPOINT ["./server"]
