@@ -1,4 +1,4 @@
-# ===== Stage 1: Build static files =====
+
 FROM node:14 AS web
 
 WORKDIR /usr/src/app
@@ -9,7 +9,6 @@ RUN npm install -g serve && \
     npm install && \
     npm run build
 
-# ===== Stage 2: Minimal final image =====
 FROM node:14-alpine3.13
 
 EXPOSE 5000
