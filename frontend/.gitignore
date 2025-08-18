@@ -1,0 +1,45 @@
+# === Node / Frontend ===
+/frontend/node_modules
+/frontend/.pnp
+/frontend/.pnp.js
+/frontend/build
+/frontend/coverage
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+
+# === Python / Backend ===
+/backend/__pycache__/
+/backend/*.pyc
+/backend/*.pyo
+/backend/*.pyd
+/backend/.pytest_cache/
+/backend/.venv/
+/backend/env/
+/backend/venv
+/backend/.mypy_cache
+
+# === Environment files ===
+.env
+.env.*
+!.env.example   # можно оставить пример файла с пустыми значениями
+
+# === Docker / Database ===
+/postgres_data
+/redis_data
+/database
+/*.pid
+
+# === Logs ===
+*.log
+logs/
+*.out
+
+# === System / IDE ===
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+.vscode/
+.idea/
