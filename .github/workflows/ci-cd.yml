@@ -30,7 +30,7 @@ jobs:
 
       - name: Push frontend image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/frontend:latest
-        
+
       - name: Deploy to Server
         uses: appleboy/ssh-action@v1.2.0
         with:
@@ -41,6 +41,5 @@ jobs:
           script: |
             cd ~/fullstack-docker-project
             git pull origin main
-            docker-compose pull
-            docker-compose up -d --remove-orphans
-
+            sudo docker-compose pull
+            sudo docker-compose up -d --remove-orphans
