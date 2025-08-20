@@ -1,4 +1,4 @@
-FROM golang:1.16 AS srv
+FROM golang:1.16 AS build-env
 
 WORKDIR /usr/src/app
 
@@ -15,9 +15,9 @@ EXPOSE 8080
 
 WORKDIR /usr/src/app
 
-COPY --from=srv /usr/src/app/server /usr/src/app
-COPY --from=srv /etc/passwd /etc/passwd
+COPY --from=build-env /usr/src/app/server /usr/src/app
+COPY --from=build-env /etc/passwd /etc/passwd
 
 USER appuser
 
-ENTRYPOINT ["./server"]
+ENTRYPOINT [ "./server" ]

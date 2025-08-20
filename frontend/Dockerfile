@@ -1,5 +1,5 @@
 
-FROM node:14 AS web
+FROM node:14 AS build-phase
 
 WORKDIR /usr/src/app
 
@@ -15,7 +15,7 @@ EXPOSE 5000
 
 WORKDIR /usr/src/app
 
-COPY --from=web /usr/src/app/build/ /usr/src/app/build
+COPY --from=build-phase /usr/src/app/build/ /usr/src/app/build
 
 RUN npm install -g serve && \
     adduser -D appuser && \
@@ -23,4 +23,4 @@ RUN npm install -g serve && \
 
 USER appuser
 
-ENTRYPOINT ["serve", "-s", "-l", "5000", "build"]
+ENTRYPOINT [ "serve", "-s", "-l", "5000", "build" ]

@@ -1,45 +1,20 @@
-# === Node / Frontend ===
-/frontend/node_modules
-/frontend/.pnp
-/frontend/.pnp.js
-/frontend/build
-/frontend/coverage
-/frontend/npm-debug.log*
-/frontend/yarn-debug.log*
-/frontend/yarn-error.log*
+/node_modules
+/.pnp
+.pnp.js
 
-# === Python / Backend ===
-/backend/__pycache__/
-/backend/*.pyc
-/backend/*.pyo
-/backend/*.pyd
-/backend/.pytest_cache/
-/backend/.venv/
-/backend/env/
-/backend/venv
-/backend/.mypy_cache
+# testing
+/coverage
 
-# === Environment files ===
-.env
-.env.*
-!.env.example   # можно оставить пример файла с пустыми значениями
+# production
+/build
 
-# === Docker / Database ===
-/postgres_data
-/redis_data
-/database
-/*.pid
-
-# === Logs ===
-*.log
-logs/
-*.out
-
-# === System / IDE ===
+# misc
 .DS_Store
-Thumbs.db
-*.swp
-*.swo
-*.tmp
-.vscode/
-.idea/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
