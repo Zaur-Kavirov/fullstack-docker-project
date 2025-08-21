@@ -41,5 +41,6 @@ jobs:
           script: |
             cd ~/fullstack-docker-project
             git pull origin main
-            sudo docker-compose pull
-            sudo docker-compose up -d --remove-orphans
+            sudo /usr/bin/docker-compose pull
+            sudo /usr/bin/docker-compose up -d --remove-orphans
+
