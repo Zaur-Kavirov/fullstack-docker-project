@@ -36,11 +36,12 @@ jobs:
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: kavirovzaur
-          key: ${{ secrets.SERVER_SSH_KEY }}
+          key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
             cd ~/fullstack-docker-project
             git pull origin main
             sudo /usr/bin/docker-compose pull
             sudo /usr/bin/docker-compose up -d --remove-orphans
+
 
