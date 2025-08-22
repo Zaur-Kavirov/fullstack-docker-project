@@ -1,43 +1,43 @@
 version: "3.5"
 
 services:
-frontend:
-image: iazuri/frontend:latest
-ports:
-- "5000:5000"
-environment:
-- REACT_APP_BACKEND_URL=http://backend:8080
-container_name: frontend
-depends_on:
-- backend
+  frontend:
+    image: iazuri/frontend:latest
+    ports:
+      - "5000:5000"
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:8080
+    container_name: frontend
+    depends_on:
+      - backend
 
-backend:
-image: iazuri/backend:latest
-ports:
-- "8080:8080"
-environment:
-- REDIS_HOST=redis
-- POSTGRES_HOST=postgres
-- POSTGRES_USER=postgres
-- POSTGRES_PASSWORD=postgres
-- POSTGRES_DATABASE=postgres
-- REQUEST_ORIGIN=http://localhost:5000
-container_name: backend
-depends_on:
-- postgres
-- redis
+  backend:
+    image: iazuri/backend:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - REDIS_HOST=redis
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=postgres
+      - REQUEST_ORIGIN=http://localhost:5000
+    container_name: backend
+    depends_on:
+      - postgres
+      - redis
 
-redis:
-image: redis:alpine
-restart: unless-stopped
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
 
-postgres:
-image: postgres:13.2-alpine
-restart: unless-stopped
-environment:
-POSTGRES_PASSWORD: postgres
+  postgres:
+    image: postgres:13.2-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - database:/var/lib/postgresql/data
+
 volumes:
-- database:/var/lib/postgresql/data
-
-volumes:
-database:
+  database:
